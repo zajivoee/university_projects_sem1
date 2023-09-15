@@ -3,6 +3,7 @@
 #include <cmath>
 
 int NOuter::NInner::DoSomething(int lhs, int rhs) {
+    return lhs + rhs;
 }
 
 int NOuter::DoSomething(int lhs, int rhs) {
