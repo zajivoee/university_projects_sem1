@@ -55,11 +55,8 @@ void CheckCopyConstructor() {
     }
     getline(out, ans);
     assert(ans == "Destructed 3");
-<<<<<<< HEAD
     getline(out, ans);
     assert(ans == "Destructed 3");
-=======
->>>>>>> d84f149 (array 1st commit)
 }
 
 void CheckCopyConstructorWithResize() {
