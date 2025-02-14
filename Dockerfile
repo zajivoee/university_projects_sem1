@@ -1,40 +1,40 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
-RUN apt-get update
+ENV TZ Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get update --fix-missing
 
 RUN apt-get install -y software-properties-common
 
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-RUN apt-get update
-
-RUN apt-get install -y \
-        make \
-        build-essential \
-        g++-13 \
-        gdb \
-        python3 \
-        python3-pip \
-        git \
-        man \
-        vim
-
 RUN apt-get update --fix-missing
-RUN apt-get install -y qemu-system-x86 \
-        qemu-user-static
-
-ENV TZ=Europe/Moscow
-
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-
-ENV CXX="/usr/bin/g++-13"
-ENV CC="/usr/bin/gcc-13"
+RUN apt-get install -y \
+    build-essential \
+    gcc-multilib \
+    gcc-13 \
+    g++-13
 
 RUN update-alternatives \
-    --install /usr/bin/gcc gcc /usr/bin/gcc-13 20 \
+    --install /usr/bin/gcc gcc /usr/bin/gcc-13 40 \
     --slave /usr/bin/g++ g++ /usr/bin/g++-13
+
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get install -y \
+    python3.9 \
+    python3-pip \
+    python3.9-dev \
+    git
+
+RUN apt-get update --fix-missing
+RUN apt-get install -y qemu-system-x86
+
+RUN yes | unminimize
+
+RUN apt-get install -y \
+    man \
+    manpages-dev \
+    manpages-posix-dev
 
 WORKDIR /workspace
