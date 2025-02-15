@@ -30,11 +30,4 @@ RUN apt-get install -y \
 RUN apt-get update --fix-missing
 RUN apt-get install -y qemu-system-x86
 
-RUN yes | unminimize
-
-RUN apt-get install -y \
-    man \
-    manpages-dev \
-    manpages-posix-dev
-
 WORKDIR /workspace
