@@ -25,7 +25,7 @@ void Exec(struct Tokenizer* tokenizer) {
 
     if (cur_pid == 0) {
         execvp(ARGV[0], ARGV);
-        fprintf(stderr, "Command not found!\n");
+        fprintf(stderr, "Command not found\n");
         _exit(1);
     } else if (cur_pid > 0) {
         wait(NULL);
