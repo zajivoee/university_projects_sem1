@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "tokenizer.h"
+#include "sys/wait.h"
 
 void Exec(struct Tokenizer* tokenizer) {
     if (tokenizer->token_count == 0) {
