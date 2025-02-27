@@ -4,6 +4,7 @@
 #include "sys/wait.h"
 #include <stdbool.h>
 
+
 //void close_file_descriptor(int oldIn, int oldOut, int newIn, int newOut) {
 //    if (newIn != STDIN_FILENO) {
 //        close(newIn);
