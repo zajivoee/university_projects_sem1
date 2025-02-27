@@ -79,7 +79,7 @@ void Exec(struct Tokenizer* tokenizer) {
 
             cur->start[cur->len] = '\0';
 
-            out_fd = open(cur->start, O_WRONLY | O_CREAT | O_TRUNC);
+            out_fd = open(cur->start, O_WRONLY | O_CREAT | O_TRUNC, 0644);
             if (out_fd < 0) {
                 printf("I/O error\n");
                 close(out_fd);
@@ -109,6 +109,7 @@ void Exec(struct Tokenizer* tokenizer) {
 
         execvp(ARGV[0], ARGV);
         printf("Command not found\n");
+        free(ARGV);
         return;
     } else {
         if (in_fd != STDIN_FILENO)
