@@ -90,6 +90,7 @@ void Exec(struct Tokenizer* tokenizer) {
         cur = cur->next;
     }
 
+
     ARGV[wordsCnt] = NULL;
 
     pid_t pid = fork();
