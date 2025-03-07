@@ -43,12 +43,12 @@ sum_struct:
 sum_array:
     xor %rax, %rax
     test %rsi, %rsi
-    jz sum_array_done
+    jz .sum_array_done
 .sum_array_loop:
     add (%rdi), %rax
     add $8, %rdi
     dec %rsi
-    jnz .sum_array_loop
+    jnz sum_array_loop
 .sum_array_done:
     ret
 
@@ -68,6 +68,6 @@ sum_args:
     add (%rdx), %rax
     add $8, %rdx
     dec %rcx
-    jnz .sum_args_loop
+    jnz sum_args_loop
 .sum_args_done:
     ret
