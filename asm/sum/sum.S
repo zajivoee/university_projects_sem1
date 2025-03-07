@@ -42,11 +42,15 @@ sum_struct:
 //
 sum_array:
     xor %rax, %rax
-    test %rsi, %rsi
-    jz .sum_array_done
-.sum_array_loop:
+    cmp $0, %rsi
+    jz .end_sum_array
     add (%rdi), %rax
+    dec %rsi
+.sum_array_loop:
+    cmp $0, %rsi
+    jle .end_sum_array
     add $8, %rdi
+    add (%rdi), %rax
     dec %rsi
     jnz sum_array_loop
 .sum_array_done:
@@ -60,14 +64,15 @@ sum_array:
 //
 sum_args:
     xor %rax, %rax
-    mov %rdi, %rcx
-    lea 8(%rsp), %rdx
-    test %rcx, %rcx
-    jz .sum_args_done
+    xor %rcx, %rcx
 .sum_args_loop:
-    add (%rdx), %rax
-    add $8, %rdx
-    dec %rcx
+    cmp $0, %rdi
+    jz .end_sum_array
+    add $8, %rcx
+    add %rcx, %rsp
+    add (%rsp), %rax
+    sub %rcx, %rsp
+    dec %rdi
     jnz sum_args_loop
 .sum_args_done:
     ret
