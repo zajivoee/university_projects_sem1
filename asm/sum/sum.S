@@ -61,10 +61,7 @@ sum_array_loop:
 //
 sum_args:
     xor %rax, %rax
-    mov %rdi, %rcx
-    lea 8(%rsp), %rdx
-    test %rcx, %rcx
-    jz .end_sum_args
+    xor %rcx, %rcx
 sum_args_loop:
     cmp $0, %rdi
     jz .end_sum_array
