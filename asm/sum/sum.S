@@ -11,7 +11,8 @@
 //    rax: сумма чисел
 //
 sum:
-    // your code here
+    mov %rdi, %rax
+    add %rsi, %rax
     ret
 
 // input:
@@ -27,7 +28,9 @@ sum:
 //    в поле sum нужно записать сумму a и b
 //
 sum_struct:
-    // your code here
+    mov (%rdi), %rax
+    add 8(%rdi), %rax
+    mov %rax, 16(%rdi)
     ret
 
 // input:
@@ -38,7 +41,15 @@ sum_struct:
 //    rax: сумма элементов массива
 //
 sum_array:
-    // your code here
+    xor %rax, %rax
+    test %rsi, %rsi
+    jz sum_array_done
+.sum_array_loop:
+    add (%rdi), %rax
+    add $8, %rdi
+    dec %rsi
+    jnz .sum_array_loop
+.sum_array_done:
     ret
 
 // input:
@@ -48,5 +59,15 @@ sum_array:
 //    rax: сумма элементов со стека
 //
 sum_args:
-    // your code here
+    xor %rax, %rax
+    mov %rdi, %rcx
+    lea 8(%rsp), %rdx
+    test %rcx, %rcx
+    jz .sum_args_done
+.sum_args_loop:
+    add (%rdx), %rax
+    add $8, %rdx
+    dec %rcx
+    jnz .sum_args_loop
+.sum_args_done:
     ret
