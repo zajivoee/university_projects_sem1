@@ -9,12 +9,9 @@ RUN apt-get install -y software-properties-common
 
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-RUN apt-get update --fix-missing
-RUN apt-get install -y \
-    build-essential \
-    gcc-multilib \
-    gcc-13 \
-    g++-13
+RUN apt-get update --fix-missing \
+    && ( apt-get install -y gcc-multilib || echo "Warning: not installing gcc-multilib" ) \
+    && apt-get install -y build-essential gcc-13 g++-13
 
 RUN update-alternatives \
     --install /usr/bin/gcc gcc /usr/bin/gcc-13 40 \
